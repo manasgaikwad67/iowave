@@ -1,0 +1,116 @@
+# Default Configuration for IQ Signal Analyzer
+# All values can be overridden via CLI or GUI
+
+file_loading:
+  max_file_size_mb: 500
+  supported_extensions: [".wav", ".iq", ".bin", ".dat", ".raw"]
+  default_iq_dtype: "int16"
+  default_iq_endian: "little"
+  default_iq_layout: "interleaved"
+  default_sample_rate: 2048000
+  require_sample_rate_for_raw: true
+
+preprocessing:
+  remove_nan_inf: true
+  remove_dc_offset: true
+  normalize: false
+  detrend: false
+  filter_enabled: false
+  filter_type: "bandpass"  # lowpass, highpass, bandpass, notch
+  low_cut_hz: 1000
+  high_cut_hz: 100000
+  filter_order: 4
+  filter_design: "sos"  # sos, ba
+  resample_enabled: false
+  target_sample_rate: 1024000
+  decimation_factor: 1
+
+fft:
+  size: 8192
+  zero_padding: true
+  window: "hann"  # hann, hamming, blackman, bartlett, flattop
+  fftshift: true
+
+psd:
+  method: "welch"  # welch, periodogram
+  nperseg: 2048
+  noverlap: 1024
+  nfft: 8192
+  window: "hann"
+  scaling: "density"  # density, spectrum
+
+peak_detection:
+  prominence_db: 10.0
+  min_distance_hz: 10000
+  min_height_db: -60.0
+  width_hz: null
+  threshold_db: null
+
+bandwidth:
+  method: "occupied"  # occupied, minus_3db
+  percentages: [90.0, 95.0, 99.0]
+  interpolation: true
+
+snr:
+  method: "spectral"  # spectral, time_domain
+  signal_region_margin_hz: 5000
+  noise_region_selection: "automatic"  # automatic, manual
+  min_noise_bins: 100
+
+instantaneous_frequency:
+  enabled: true
+  amplitude_threshold: 0.01  # relative to max amplitude
+  unwrap_phase: true
+  differentiation_method: "central"  # forward, central, backward
+
+spectral_features:
+  enabled: true
+  rolloff_percent: 0.85
+
+visualization:
+  max_points_waveform: 10000
+  max_points_constellation: 50000
+  spectrogram_max_freq_hz: null
+  spectrogram_nperseg: 512
+  spectrogram_noverlap: 256
+  colormap: "viridis"
+  figure_dpi: 100
+  figure_width: 10
+  figure_height: 6
+
+ml:
+  enabled: true
+  model_path: "models/trained/modulation_classifier.joblib"
+  feature_version: "1.0"
+  confidence_threshold: 0.5
+  top_k_predictions: 3
+
+quality_score:
+  enabled: true
+  weights:
+    snr: 0.30
+    frequency_stability: 0.25
+    amplitude_stability: 0.20
+    spectral_quality: 0.15
+    noise: 0.10
+  snr_thresholds_db: [0, 10, 20, 30, 40]
+  frequency_stability_thresholds_ppm: [1000, 100, 10, 1, 0.1]
+
+reporting:
+  include_plots: true
+  plot_format: "png"
+  output_formats: ["json", "csv", "markdown"]
+  include_metadata: true
+  include_warnings: true
+
+performance:
+  max_memory_mb: 2048
+  chunk_size_samples: 1048576
+  enable_timing: true
+  parallel_processing: false
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: null
+  console: true

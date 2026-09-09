@@ -1,0 +1,83 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Distribution / Packaging
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Project specific
+data/raw/*
+data/processed/*
+data/synthetic/*
+data/sample/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/synthetic/.gitkeep
+!data/sample/.gitkeep
+
+models/trained/*
+models/metadata/*
+!models/trained/.gitkeep
+!models/metadata/.gitkeep
+
+reports/generated/*
+reports/plots/*
+!reports/generated/.gitkeep
+!reports/plots/.gitkeep
+
+notebooks/exploration/*.ipynb
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment variables
+.env
+.env.local
+
+# ERP application dependencies and build output
+erp-system/backend/vendor/
+erp-system/frontend/node_modules/
+erp-system/frontend/dist/
+
+# Local analysis outputs
+analysis_*.json
+test_report.json
+test_iq.wav
+
+# IDE specific
+*.pyc
+*.pyo
+*.pyd
